@@ -1,1 +1,85 @@
 \section{Problem 1}
+\subsection{}
+In general there are 6 compinations that sum to 7 
+\{\{1,6\},\{2,5\},\{3,4\},\{4,3\},\{5,2\},\{6,1\}\}. 
+When the dice is fair all six of them has equal probability. 
+So the probabilty to win with a fair dice is:
+\begin{equation}
+p_{fair-win} = \frac{6}{36} = \frac{1}{6}
+\end{equation}
+When the dice are unfair then the all of the probabilities 
+change. So we now that 3 and for have $\frac{1}{3}$ probability.
+So the rest is:
+\begin{align*}
+\frac{1}{3} + \frac{1}{3} + 4*x = 1 \\
+\frac{2}{3} + 4*x =1 \\
+x = \frac{1}{12}
+\end{align*}
+This is the probability of the rest of the dice {1,2,5,6}.
+To find the probability to win with unfair dice we must 
+calculate all the new probabilities. As we know that 
+\{1,2,5,6\} is $\frac{1}{12}$ the probability for the 
+\{\{1,6\},\{2,5\},\{5,2\},\{6,1\}\} is $\frac{1}{144}$ each.
+So the probability to win with the unfair dice is 
+\begin{align*}
+p_{unfair-win} = 4*\frac{1}{144} + 2*\frac{1}{9} \\
+p_{unfair-win} = \frac{1}{36} + \frac{2}{9} \\
+\end{align*}
+\begin{equation}
+p_{unfair-win} = \frac{1}{4}
+\end{equation}
+Having calculated this now we are ready to start looking what 
+the casino wants from us. 
+The casino asks that we will create a function that will take
+the number of rounds played (N) and outputs minimum number of 
+wins that means that the dice are unfair.
+This is equavalent to solving the following unequality:
+\begin{equation} \label{eq:unequality}
+P(Dice=Unfair\mid R=N,X=x) >0.5
+\end{equation}
+Where R is the random number of rounds and X is the number of wins.
+From Bayes theorem the \ref{eq:unequality} is represented as
+\begin{equation}
+P(Dice=U\mid R=N,X=x) = \frac{P(R=N,X=x\mid D=U)P(D=U)}{P(X=x)}
+\end{equation}
+Using the law of total probability the denominator is changed as:
+\begin{align*}
+P(Dice=U\mid R=N,X=x) &= \frac{P(R=N,X=x\mid D=U)P(D=U)}{P(R=N,X=x\mid D=U)P(D=U)+P(R=N,X=x\mid D=F)P(D=F)}
+\end{align*}
+Because this is too big we are simplifing in
+\begin{equation} \label{eq:unequality1}
+P(Dice=U\mid R=N,X=x) =\cfrac{1}{1+ \frac{P(R=N,X=x\mid D=F)P(D=F)}{P(R=N,X=x\mid D=U)P(D=U)}}
+\end{equation}
+This probabilities are Bernoulli trials. So they obey to the binomial distribution.
+This means that the probability of x wins after N rounds is:
+\begin{equation} \label{eq:bin}
+p(x,N) = \binom{N}{x} \cdot p^x(1-p)^{N-x}
+\end{equation}
+So the \ref{eq:unequality1} with \ref{eq:bin} becomes:
+\begin{align*}
+P(Dice=U\mid R=N,X=x) &=\cfrac{1}{1+ \frac{\binom{N}{x} \cdot p_f^x(1-p_f)^{N-x}P(D=F)}{\binom{N}{x} \cdot p_u^x(1-p_u)^{N-x}P(D=U)}} \\
+P(Dice=U\mid R=N,X=x) &=\cfrac{1}{1+\frac{p_f^x(1-p_f)^{N-x}P(D=F)}{p_u^x(1-p_u)^{N-x}P(D=U)}}
+\end{align*}
+The problem gives us that $P(D=U) = \frac{1}{1000}$ so the $P(D=F) =999/100$
+Having all this combined with the $p_f=1/6$ and $p_u=1/4$ we have:
+\begin{align*}
+\cfrac{1}{1 + (\frac{3}{5})^x\cdot(\frac{10}{9})^N\cdot999 } &> 1/2 \\
+(\frac{3}{5})^x\cdot(\frac{10}{9})^N\cdot999 &<1
+(\frac{3}{5})^x &< \frac{1}{999}\cdot(\frac{9}{10})^N
+\end{align*}
+As we need to solve for x we will take logarithm with base $3/5$
+and we will change the direction of the unequaloty because the 
+logarithm with base less than 1 is monotonically decreasing we have
+\begin{equation}
+x > N\cdot\log_{\frac{3}{5}}(\frac{9}{10})+\log_{\frac{3}{5}}(\frac{1}{999}))
+\end{equation}
+The minimum number of wins is:
+\begin{equation} \label{eq:end}
+x = \lceil 0.206N + 13.52  \rceil
+\end{equation}
+And this is the function the casino needs.
+\subsection{}
+Having the function \ref{eq:end} we need to observe at least
+$\lceil 0.206N + 13.52  \rceil \geq N$ which we get $N = \lceil 17.02 \rceil = 18$
+So for 18 rounds we get from the \ref{eq:end} function $x = \lceil 17.22 \rceil = 18$ wins.
+So we need 18 consecutive wins to infere that the dice is unfair.
