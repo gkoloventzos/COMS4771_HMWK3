@@ -1,1 +1,81 @@
 \section{Problem 2}
+\subsection{}
+For $p(H)$ we know:
+$p(H) = \int p(H,\mu) d\mu = \int p(H\mid\mu)p(\mu)d\mu = E\{p(H\mid\mu)\} = E\{\mu\}$
+For A the $1$ is the pdf function as it is uniform.
+For B we have that it will be of the form $ax^2+bx+c=y$
+Also we know $f(0)=0$ which means $c=0$.
+Also we know $f(1)=0$ which means $a=-b$.
+And last $\int_0^1f(x)dx =1$ because it is probability.
+\begin{align*}
+\int_0^1ax^2-axdx &= 1 \\
+\Big[ \frac{ax^3}{3} - \frac{ax^2}{2}\Big]_0^1 &=1 \\
+\frac{a}{3} - \frac{a}{2} &= 1 \\
+a &= -6
+\end{align*}
+So the pdf function is $-6\mu^2+6\mu=0$.
+the $E\{\mu\} = \int_xp(x)f(x)dx$.
+For our functions $f(x) = \mu$.
+Giving all these for the A:
+\begin{align*}
+E\{\mu\} &= \int_{0}^{1} p(x)f(x) dx
+=\int_{0}^{1}\mu d\mu \\
+&=[\frac{m^2}{2}]_0^1
+=\frac{1}{2} 
+\end{align*}
+For B:
+\begin{align*}
+E\{\mu\} &= \int_{0}^{1}p(x)f(x)dx
+=-6\int_{0}^{1} (\mu^2-\mu)\mu d\mu \\
+&=-6\Big[ \frac{\mu^4}{4}-\frac{\mu^3}{3}\Big]_0^1
+=-6(\frac{1}{4}-\frac{1}{3}) \\
+&=-6(-\frac{1}{12})
+=\frac{1}{2}
+\end{align*}
+\subsection{}
+To find the posterior distribution I have to calculate 4 numbers.
+All of our experiments are subject to binomial distribution.
+For function A:
+In general the posterior distribution is found by:
+$f(\mu|H=h,T=t) = \frac{Pr(H=h\mid \mu,N=h+t)g(\mu)}{\int_0^1 Pr(H=h\mid \mu',N=h+t)g(\mu') dr}$
+But as the $Pr(H=h\mid \mu,N=h+t) = \binom{N}{h}\mu^h(1-\mu)^t$ and the $g(\mu) =1$ as uniform.
+We have $f(\mu|H=h,T=t) = \frac{\binom{N}{h}\mu^h(1-\mu)^t}{\int_0^1 \binom{N}{h}\mu^h(1-\mu)^t}$
+This can be expressed as a beta function:
+$f(\mu|H=h,T=t) = \frac{\mu^h(1-\mu)^t}{B (h+1)(t+1)}$\\
+Which using factorials can be written:
+$f(\mu|H=h,T=t) = \frac{(h+t+1)!}{h!t!} \mu^h(1-\mu)^t$\\
+For the first data($D_1$) the function becomes:
+$ \frac{(1+1+1)!}{1!1!}\mu (1-\mu = 6\mu - 6\mu^2)$\\
+For the second data($D_2$)
+$\frac{(3+0+1)!}{3!1!}(1-\mu)^3 = 4\cdot (1-\mu)^3$\\
+For function B:
+As the $g(\mu) = -6\mu^2 + 6\mu$ the Beta function is changed as follows:\\
+$f(\mu|H=h,T=t) = \frac{\binom{N}{h}\mu^h(1-\mu)^t -6\mu (1- \mu)}{\int_0^1 \binom{N}{h}\mu^h(1-\mu)^t -6\mu (1- \mu)}$\\
+$f(\mu|H=h,T=t) = \frac{\mu^{h+1}(1-\mu)^{t+1}}{\int_0^1 \mu^{h+1}(1-\mu)^{t+1}}$\\
+This is a Beta function with h+2 and t+2. So this will be transform the previous Beta function with factorials:
+$f(\mu|H=h,T=t) = \frac{(h+1+t+1+1)!}{h+1!t+1!} \mu^{h+1}(1-\mu)^{t+1}$\\
+For the $D_1$:
+$\frac{5!}{2!2!} \mu^2(1-\mu)^2 = 30\mu^2(1-\mu)^2$\\
+For the $D_2$:
+$\frac{6!}{4!} \mu(1-\mu)^4 = 30\mu(1-\mu)^4$\\
+\subsection{}
+For the $\mu_{ML} = \frac{Number of heads}{Number of rounds}$
+So for $D_1$: $\mu_{ML} = \frac{1}{2}$\\
+For $D_2$: $\mu_{ML} = \frac{0}{3} = 0$\\
+\subsection{}
+To find the MAP estimate will use the function that are created from the function:
+$\mu_{MAP} = \frac{h+a-1}{N+b+a-2}$\footnote{http://www.mi.fu-berlin.de/wiki/pub/ABI/Genomics12/MLvsMAP.pdf :page 18}. \\
+For A: $a=1,b=1$ and $D_1$: $\frac{1+1-1}{2+1+1-2} = \frac{2}{4} = \frac{1}{2}$\\
+For the $D_2$: $\frac{0+1-1}{3+1+1-2} =0$\\
+For the B function $a=2,b=2$:\\
+For $D_1$: $\frac{1+2-1}{2+2+2-2} = \frac{1}{2}$\\
+For $D_2$: $\frac{0+2-1}{3+2+2-2} = \frac{1}{5}$\\
+\subsection{}
+For the full bayesian probability we know that is the same as teh Bayes' estimator.
+So we will use the function for finding the full bayesian probability as $E[\mu\mid D] = \frac{H+a}{N+a+b}$\footnote{http://www.math.uah.edu/stat/point/Bayes.html}.\\
+For A and $D_1$: $\frac{1+1}{2+1+1} = \frac{1}{2}$\\
+For $D_2$: $\frac{1+0}{3+1+1} = \frac{1}{5}$\\
+For B and $D_1$: $\frac{1+2}{2+2+2} = \frac{1}{2}$\\
+For $D_2$: $\frac{0+2}{3+2+2} = \frac{2}{7}$\\
+\subsection{}
+
