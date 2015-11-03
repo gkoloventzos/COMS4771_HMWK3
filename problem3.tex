@@ -15,10 +15,10 @@ We can now easily maximize the log-likehood,
 \end{equation*}
 For finding a maximum (or minimum) we will take the derivative with respect of $\lambda$ and will set equal to 0.
 \begin{equation*}
-\frac{\partial\mathcal{L}}{\partial\lambda} = \sum_{i=1}^n \frac{\partial}{\partial\lambda} \biggl( \log\frac{1}{\Gamma(a)} + a*\log\lambda + (a-1)\log{x_i} - \lambda*x_i \biggr)
+\frac{\partial\log\mathcal{L}}{\partial\lambda} = \sum_{i=1}^n \frac{\partial}{\partial\lambda} \biggl( \log\frac{1}{\Gamma(a)} + a*\log\lambda + (a-1)\log{x_i} - \lambda*x_i \biggr)
 \end{equation*}
 \begin{equation*}
-\frac{\partial\mathcal{L}}{\partial\lambda} = \sum_{i=1}^n \biggl( \frac{a}{\lambda} - x_i \biggr)
+\frac{\partial\log\mathcal{L}}{\partial\lambda} = \sum_{i=1}^n \biggl( \frac{a}{\lambda} - x_i \biggr)
 \end{equation*}
 Setting this equal to 0
 \begin{equation*}
@@ -29,6 +29,6 @@ To figure out if it is maximum or minimum we will use the second derivative of $
 So in order to be maximum the second derivative must be negative.
 
 \begin{equation*}
-\frac{\partial^2\mathcal{L}}{\partial\lambda^2} = \sum_{i=1}^n \biggl( -\frac{a}{\lambda^2} -1 \biggr)
+\frac{\partial^2\log\mathcal{L}}{\partial\lambda^2} = \sum_{i=1}^n \biggl( -\frac{a}{\lambda^2} -1 \biggr)
 \end{equation*}
 As $ a > 0 $ and $\lambda^2 > 0$ then $-\frac{a}{\lambda^2} < 0$. So all the previous equation is negative.
