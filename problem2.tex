@@ -1,7 +1,7 @@
 \section{Problem 2}
 \subsection{}
 For $p(H)$ we know:
-$p(H) = \int p(H,\mu) d\mu = \int p(H\mid\mu)p(\mu)d\mu = E\{p(H\mid\mu)\} = E\{\mu\}$
+$p(H) = \int p(H,\mu) d\mu = \int p(H\mid\mu)p(\mu)\,d\mu = E\{p(H\mid\mu)\} = E\{\mu\}$
 For A the $1$ is the pdf function as it is uniform.
 For B we have that it will be of the form $ax^2+bx+c=y$
 Also we know $f(0)=0$ which means $c=0$.
@@ -14,19 +14,19 @@ And last $\int_0^1f(x)dx =1$ because it is probability.
 a &= -6
 \end{align*}
 So the pdf function is $-6\mu^2+6\mu=0$.
-the $E\{\mu\} = \int_xp(x)f(x)dx$.
+the $E\{\mu\} = \int_xp(x)f(x) \,dx$.
 For our functions $f(x) = \mu$.
 Giving all these for the A:
 \begin{align*}
-E\{\mu\} &= \int_{0}^{1} p(x)f(x) dx
+E\{\mu\} &= \int_{0}^{1} p(x)f(x) \,dx
 =\int_{0}^{1}\mu d\mu \\
 &=[\frac{m^2}{2}]_0^1
 =\frac{1}{2} 
 \end{align*}
 For B:
 \begin{align*}
-E\{\mu\} &= \int_{0}^{1}p(x)f(x)dx
-=-6\int_{0}^{1} (\mu^2-\mu)\mu d\mu \\
+E\{\mu\} &= \int_{0}^{1}p(x)f(x) \,dx
+=-6\int_{0}^{1} (\mu^2-\mu)\mu \,d\mu \\
 &=-6\Big[ \frac{\mu^4}{4}-\frac{\mu^3}{3}\Big]_0^1
 =-6(\frac{1}{4}-\frac{1}{3}) \\
 &=-6(-\frac{1}{12})
@@ -78,4 +78,46 @@ For $D_2$: $\frac{1+0}{3+1+1} = \frac{1}{5}$\\
 For B and $D_1$: $\frac{1+2}{2+2+2} = \frac{1}{2}$\\
 For $D_2$: $\frac{0+2}{3+2+2} = \frac{2}{7}$\\
 \subsection{}
-
+In order to find the variance we will use the equation:\\
+$Var = \{x\} = E\{x\}^2 - E\{x^2\}$\\
+Where $E\{x\} = \int_0^1 p(x)x \,dx$
+For the A function for the $D_1$ we had that $p(\mu) = 6\mu(1-\mu)$
+\begin{align*}
+E\{\mu\} &= \int_0^1 6\mu(1-\mu)\mu \,d\mu \\
+&= 6 \int_0^1 \mu^2-\mu^3 \,d\mu
+ = 6 [\frac{\mu^3}{3} = \frac{\mu^4}{4}]_0^1 \\
+&= 6 (\frac{1}{3} - \frac{1}{4})
+ = 6 \frac{1}{12} \\
+&= \frac{1}{2}
+\end{align*}
+\begin{equation*}
+(E\{\mu\})^2 = \frac{1}{4}
+\end{equation*}
+For $D_2$: $p(\mu) = 4(1-\mu)^3$
+\begin{align*}
+E\{\mu\} &= \int_0^1 4(1-\mu \,d\mu \\
+&= 4 [-\frac{\mu^5}{5} + 3\frac{\mu^4}{4} - \mu^3 + \frac{\mu^2}{2}]_0^1
+= 4 (-\frac{1}{5} + 3\frac{1}{4}  -1 + frac{1}{1} \\
+&= frac{1}{5}
+\end{align*}
+\begin{equation*}
+(E\{\mu\})^2 = \frac{1}{25}
+\end{equation*}
+For B and $D_1$: $p(\mu) = 30\mu^2(1-\mu)^2$
+\begin{align*}
+E\{\mu\} &= \int_0^1 30\mu^2(1-\mu)^2\mu \,d\mu \\
+&= 30 (\frac{1}{4}(1-\mu)^2\mu^4 + \frac{1}{2}(\frac{\mu^5}{5} - \frac{\mu^6}{6}))
+&= \frac{1}{2}
+\end{align*}
+\begin{equation*}
+(E\{\mu\})^2 = \frac{1}{4}
+\end{equation*}
+For $D_2$: $p(\mu) = 30\mu(1-\mu)^4$
+\begin{align*}
+E\{\mu\} &= \int_0^1 30\mu(1-\mu)^4\mu \,d\mu \\
+&= 30 (\frac{\mu^7}{7} - 2\frac{\mu^6}{3} + 6\frac{\mu^5}{5} - \mu^4 + \frac{\mu^3}{3})
+&= \frac{2}{7}
+\end{align*}
+\begin{equation*}
+(E\{\mu\})^2 = \frac{4}{49}
+\end{equation*}
