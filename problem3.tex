@@ -1,0 +1,16 @@
+\section{Problem 3}
+By definition of maximum likehood and as the dataset has iid samples we have\\
+\begin{equation*}
+\mathcal{L} = p(x_1,\dots,x_n|\lambda) = \prod_{i=1}^n p(x_i|\lambda)
+\end{equation*}
+We can now easily maximize the log-likehood, 
+\begin{equation*}
+\log \mathcal{L}(\lambda) = \log\prod_{i=1}^n p(x_i|\lambda)=\sum_{i=1}^n \log p(x_i|\lambda)
+\end{equation*}
+\begin{equation*}
+\log \mathcal{L}(\lambda) = \sum_{i=1}^n \log \biggl( \frac{1}{\Gamma(a)} \lambda^a x_i^{a-1} e^{-\lambda x_i} \biggr)
+\end{equation*}
+\begin{equation*}
+\log \mathcal{L}(\lambda) = \sum_{i=1}^n \biggl( \log\frac{1}{\Gamma(a)} + a*\log\lambda + (a-1)\log{x_i} - \lambda*x_i \biggr)
+\end{equation*}
+
