@@ -1,1 +1,13 @@
 \section{Problem 5}
+First of all we have to find the $\frac{\partial J}{\partial w}$.
+\begin{align*}
+\frac{\partial J(w)}{\partial w} &=\frac{\partial }{\partial w} \Big[-\frac{1}{N} \sum_{i=1}^{N}\log (\sigma(y_iw^Tk_i))+\lambda w^Tw \Big]\\
+&= -\frac{1}{N} \sum_{i=1}^{N} \frac{\partial }{\partial w} \log (\sigma(y_iw^Tk_i)) + \frac{\partial }{\partial w}\lambda w^Tw \\
+&= -\frac{1}{N} \sum_{i=1}^{N} \frac{1}{\sigma(y_iw^Tk_i)}\cdot \sigma(y_iw^Tk_i) (1- \sigma(y_iw^Tk_i)) \frac{\partial }{\partial w}y_iw^Tk_i + \frac{\partial }{\partial w}\lambda w^Tw\\
+&= -\frac{1}{N} \sum_{i=1}^{N} (1- \sigma(y_iw^Tk_i))y_i\frac{\partial }{\partial w}w^Tk_i + 2\lambda w^T\\
+&= -\frac{1}{N} \sum_{i=1}^{N} (1- \sigma(y_iw^Tk_i))y_i\frac{\partial }{\partial w}k_i^Tw + 2\lambda w^T\\
+&= -\frac{1}{N} \sum_{i=1}^{N} (1- \sigma(y_iw^Tk_i))y_ik_i^T + 2\lambda w^T
+\end{align*}
+\begin{equation*}
+-\frac{\partial J(w)}{\partial w} = \frac{1}{N} \sum_{i=1}^{N} (1- \sigma(y_iw^Tk_i))y_ik_i^T + 2\lambda w^T
+\end{equation*}
