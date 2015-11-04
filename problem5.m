@@ -10,13 +10,13 @@ function problem5()
     % For plotting stats
     risks = [];
     errs = [];
-    kernel = rbf_kernel(TestX,TestX,size(TestX,1))
     prevtheta = theta+2*tol;
     while norm(theta - prevtheta) >= tol
         if curiter > maxiter
             break ;
         end
         % Current stats
+        kernel = rbf_kernel(TrainingX,TestX,size(TestX,1))
         r = risk(TestX, TestY, theta );
         f = 1./(1+exp(-TestX*theta));
         f(f >= 0.5) = 1;
