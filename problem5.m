@@ -1,8 +1,9 @@
 function problem5()
     close all ; 
-    load('data1.mat') ;
+    load('data1.mat');
     stepsize = 2;
     tol = 1e-2;
+    lambda= 1e-2;
     theta = rand(size(TestX, 2), 1 );
     maxiter = 200000;
     curiter = 0;
@@ -19,9 +20,9 @@ function problem5()
         f = 1./(1+exp(-TestX*theta));
         f(f >= 0.5) = 1;
         f(f < 0.5) = -1;
-        err = sum(f~=Y) / length (Y) ;
+        err = sum(f~=TestY)/length(TestY) ;
         %fprintf ( 'Iter:%d , error:%0.4f , risk:%0.4f \n' , curiter , err , r );
-        risks = cat(1, risks , r );
+        %risks = cat(1, risks , r );
         errs = cat(1, errs , err );
         % Update theta
         prevtheta = theta ;
@@ -29,15 +30,15 @@ function problem5()
         theta = theta - stepsize*G;
         curiter = curiter + 1;
     end
-    figure , plot (1: curiter , errs , 'r' , 1:curiter , risks , 'g' );
-    title('Error ( red ) and risk ( green ) vs . iterations ' );
-    disp('theta');
-    disp(theta)
+    %figure , plot (1: curiter , errs , 'r' , 1:curiter , risks , 'g' );
+    %title('Error ( red ) and risk ( green ) vs . iterations ' );
+    %disp('theta');
+    %disp(theta)
     x=0:0.01:1;
     y=(-theta(3) - theta (1).* x)/ theta (2);
-    figure , plot (x, y, 'r' ); hold on ;
-    plot (TestX(: , 1 ) , TestX(: , 2 ) , '.' ) ;
-    title ( 'Linear decision boundary ' );
+    %figure , plot (x, y, 'r' ); hold on ;
+    %plot (TestX(: , 1 ) , TestX(: , 2 ) , '.' ) ;
+    %title ( 'Linear decision boundary ' );
 end
 
 function R = risk (x, y, theta )
@@ -47,16 +48,37 @@ function R = risk (x, y, theta )
 end
     
 function g = gradient (x, y, theta )
-    yy = repmat (y , 1 , size (x,2));
+    yy = repmat(y , 1 , size (x,2));
     f = 1./(1+exp(-x*theta ));
-    ff = repmat ( f , 1 , size (x,2));
-    d = x.*repmat (exp(-x*theta ) , 1, size (x,2));
-    g = (1-yy ).*( x-d.* ff) - yy.* d.* ff ;
+    ff = repmat(f, 1, size(x,2));
+    d = x.*repmat(exp(-x*theta ), 1, size(x,2));
+    g = (1-yy).*(x-d.* ff)-yy.* d.*ff ;
     g = sum(g);
     g = g/length (y);
     g = g';
 end
 
 function e=myexp(x,theta)
-    k_2= 
+    k_2;
+end
+
+function K = rbf_kernel(X,X2,sigma)
+% Inputs:
+%       X:      data matrix with training samples in rows and features in columns
+%       X2:     data matrix with test samples in rows and features in columns
+%       sigma: width of the RBF kernel
+% Output:
+%       K: kernel matrix
+
+        n1sq = sum(X.^2,1);
+        n1 = size(X,2);
+
+        if isempty(X2);
+            D = (ones(n1,1)*n1sq)' + ones(n1,1)*n1sq -2*X'*X;
+        else
+            n2sq = sum(X2.^2,1);
+            n2 = size(X2,2);
+            D = (ones(n2,1)*n1sq)' + ones(n1,1)*n2sq -2*X'*X2;
+        end;
+        K = exp(-D/(2*sigma^2));
 end
