@@ -58,7 +58,7 @@ end
 %    th=0;
 %end
 
-function K = rbf_kernel(X,X2,sigma)
+function K = rbf_kernel(X,X2)
 % Inputs:
 %       X:      data matrix with training samples in rows and features in columns
 %       X2:     data matrix with test samples in rows and features in columns
@@ -76,5 +76,5 @@ function K = rbf_kernel(X,X2,sigma)
             n2 = size(X2,2);
             D = (ones(n2,1)*n1sq)' + ones(n1,1)*n2sq -2*X'*X2;
         end;
-        K = exp(-D/(2*sigma^2));
+        K = exp(-D/(1/(n2^2)*(sum(D))));
 end
