@@ -10,6 +10,7 @@ function problem5()
     % For plotting stats
     risks = [];
     errs = [];
+    kernel = rbf_kernel(TestX,TestX,size(TestX,1))
     prevtheta = theta+2*tol;
     while norm(theta - prevtheta) >= tol
         if curiter > maxiter
@@ -26,7 +27,7 @@ function problem5()
         errs = cat(1, errs , err );
         % Update theta
         prevtheta = theta ;
-        G = gradient (TestX, TestY, theta );
+        G = gradient (TestX, TestY, theta, kernel);
         theta = theta - stepsize*G;
         curiter = curiter + 1;
     end
@@ -47,20 +48,15 @@ function R = risk (x, y, theta )
     R = mean(r);
 end
     
-function g = gradient (x, y, theta )
-    yy = repmat(y , 1 , size (x,2));
-    f = 1./(1+exp(-x*theta ));
-    ff = repmat(f, 1, size(x,2));
-    d = x.*repmat(exp(-x*theta ), 1, size(x,2));
-    g = (1-yy).*(x-d.* ff)-yy.* d.*ff ;
-    g = sum(g);
-    g = g/length (y);
-    g = g';
+function g = gradient (x, y, theta, lambda)
+
+    g = -(1/size(x,1))*1-(1/1+exp(y*theta'*kernel)*y*kernel') + 2*lambda*theta';
+
 end
 
-function e=myexp(x,theta)
-    k_2;
-end
+%function th=myexp(x,theta)
+%    th=0;
+%end
 
 function K = rbf_kernel(X,X2,sigma)
 % Inputs:
