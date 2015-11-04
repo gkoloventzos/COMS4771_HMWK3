@@ -79,7 +79,7 @@ For B and $D_1$: $\frac{1+2}{2+2+2} = \frac{1}{2}$\\
 For $D_2$: $\frac{0+2}{3+2+2} = \frac{2}{7}$\\
 \subsection{}
 In order to find the variance we will use the equation:\\
-$Var = \{x\} = E\{x\}^2 - E\{x^2\}$\\
+$Var\{x\} = E\{x^2\} - E\{x\}^2$\\
 Where $E\{x\} = \int_0^1 p(x)x \,dx$
 For the A function for the $D_1$ we had that $p(\mu) = 6\mu(1-\mu)$
 \begin{align*}
@@ -92,6 +92,14 @@ E\{\mu\} &= \int_0^1 6\mu(1-\mu)\mu \,d\mu \\
 \end{align*}
 \begin{equation*}
 (E\{\mu\})^2 = \frac{1}{4}
+\end{equation*}
+\begin{align*}
+E\{\mu^2\} &= \int_0^1 6\mu(1-\mu)\mu^2 \,d\mu\\
+&= \int_0^1 6(1-\mu)\mu^3 \,d\mu = 6(\frac{\mu^4}{4}-\frac{\mu^5}{5})_0^1\\
+&= 6(\frac{1}{4}-\frac{1}{5}) = \frac{3}{10})
+\end{align*}
+\begin{equation*}
+Var\{x\} =E\{x^2\} - E\{x\}^2  = \frac{3}{10} - \frac{1}{4} = \frac{1}{20}
 \end{equation*}
 For $D_2$: $p(\mu) = 4(1-\mu)^3$
 \begin{align*}
