@@ -66,15 +66,9 @@ function K = rbf_kernel(X,X2)
 % Output:
 %       K: kernel matrix
 
-        n1sq = sum(X.^2,1);
-        n1 = size(X,2);
-
-        if isempty(X2);
-            D = (ones(n1,1)*n1sq)' + ones(n1,1)*n1sq -2*X'*X;
-        else
-            n2sq = sum(X2.^2,1);
-            n2 = size(X2,2);
-            D = (ones(n2,1)*n1sq)' + ones(n1,1)*n2sq -2*X'*X2;
-        end;
-        K = exp(-D/(1/(n2^2)*(sum(D))));
+    N = size(X,1);
+    for i=1:N
+        D(i,:) = pdist2(X(i,:),X2(i,:),'euclidean');
+        K(:,i) = exp(-D(i,:)/(1/(N^2)*(sum(D(i,:)))));
+    end
 end
